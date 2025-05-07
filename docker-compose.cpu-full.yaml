@@ -48,9 +48,7 @@ services:
     command: ["sh", "-c", "until wget -q -O - http://localrecall:8080 > /dev/null 2>&1; do echo 'Waiting for localrecall...'; sleep 1; done; echo 'localrecall is up!'"]
 
   mcpbox:
-    build:
-      context: .
-      dockerfile: Dockerfile.mcpbox
+    image: suths/mcpbox:latest
     ports:
       - "8080"
     volumes:
