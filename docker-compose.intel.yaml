@@ -10,7 +10,7 @@ services:
     devices:
       # On a system with integrated GPU and an Arc 770, this is the Arc 770
       - /dev/dri/card1
-      - /dev/dri/renderD129
+      - /dev/dri/renderD128
 
   mcpbox:
     extends:
