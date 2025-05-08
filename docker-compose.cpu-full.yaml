@@ -41,12 +41,6 @@ services:
       - localrag-db:/db
       - localrag-assets:/assets
 
-  localrecall-healthcheck:
-    depends_on:
-      - localrecall
-    image: busybox
-    command: ["sh", "-c", "until wget -q -O - http://localrecall:8080 > /dev/null 2>&1; do echo 'Waiting for localrecall...'; sleep 1; done; echo 'localrecall is up!'"]
-
   mcpbox:
     image: suths/mcpbox:latest
     ports:
@@ -59,11 +53,12 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 2m
 
   localagi:
     depends_on:
       - localai
-      - localrecall-healthcheck
+      - localrecall
       - mcpbox
     image: localai/localai:latest-cpu
     ports:
